@@ -47,12 +47,12 @@ pipeline {
                         sloccount --duplicates --wide irisvmpy > sloccount.sc
                     '''
                 echo "Test coverage"
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' echo mok sudo -S source activate ${BUILD_TAG}
                         coverage run irisvmpy/iris.py 1 1 2 3
                         python -m coverage xml -o reports/coverage.xml
                     '''
                 echo "Style check"
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' echo mok sudo -S source activate ${BUILD_TAG}
                         pylint irisvmpy || true
                     '''
             }
@@ -77,7 +77,7 @@ pipeline {
 
         stage('Unit tests') {
             steps {
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' echo mok sudo -S source activate ${BUILD_TAG}
                         python -m pytest --verbose --junit-xml reports/unit_tests.xml
                     '''
             }
@@ -91,7 +91,7 @@ pipeline {
 
         stage('Acceptance tests') {
             steps {
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' echo mok sudo -S source activate ${BUILD_TAG}
                         behave -f=formatters.cucumber_json:PrettyCucumberJSONFormatter -o ./reports/acceptance.json || true
                     '''
             }
@@ -113,7 +113,7 @@ pipeline {
                 }
             }
             steps {
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' echo mok sudo -S source activate ${BUILD_TAG}
                         python setup.py bdist_wheel
                     '''
             }
@@ -135,7 +135,7 @@ pipeline {
 
     post {
         always {
-            sh 'conda remove --yes -n ${BUILD_TAG} --all'
+            sh 'echo mok sudo -S conda remove --yes -n ${BUILD_TAG} --all'
         }
         failure {
             emailext (
