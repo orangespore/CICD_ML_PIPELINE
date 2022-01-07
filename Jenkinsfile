@@ -29,7 +29,6 @@ pipeline {
                 echo "Building virtualenv"
                 sh  ''' 
 			echo mok sudo -S chmod -R 777 /var/lib/jenkins/miniconda3
-			echo mok sudo -S chmod -R 777 /root/miniconda3
 			echo mok sudo -S conda create --yes -n ${BUILD_TAG} python
                         echo mok sudo -S source activate ${BUILD_TAG}
                         pip install -r requirements/dev.txt
@@ -40,7 +39,7 @@ pipeline {
         stage('Static code metrics') {
             steps {
                 echo "Raw metrics"
-                sh  ''' source activate ${BUILD_TAG}
+                sh  ''' echo mok sudo -S source activate ${BUILD_TAG}
                         radon raw --json irisvmpy > raw_report.json
                         radon cc --json irisvmpy > cc_report.json
                         radon mi --json irisvmpy > mi_report.json
