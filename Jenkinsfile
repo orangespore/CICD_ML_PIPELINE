@@ -27,8 +27,8 @@ pipeline {
         stage('Build environment') {
             steps {
                 echo "Building virtualenv"
-                sh  ''' sudo conda create --yes -n ${BUILD_TAG} python
-                        sudo source activate ${BUILD_TAG}
+                sh  ''' echo mok sudo -S conda create --yes -n ${BUILD_TAG} python
+                        echo mok sudo -S source activate ${BUILD_TAG}
                         pip install -r requirements/dev.txt
                     '''
             }
