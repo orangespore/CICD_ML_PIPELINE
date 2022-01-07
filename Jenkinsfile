@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo "Building virtualenv"
                 sh  ''' 
-			sudo chmod -R 755 /root
+			echo mok sudo -S chmod -R 755 /root
 			echo mok sudo -S conda create --yes -n ${BUILD_TAG} python
                         echo mok sudo -S source activate ${BUILD_TAG}
                         pip install -r requirements/dev.txt
