@@ -53,7 +53,7 @@ pipeline {
                     '''
                 echo "Style check"
                 sh  ''' echo mok sudo -S source activate ${BUILD_TAG}
-                        pylint irisvmpy || true
+                        
                     '''
             }
             post{
