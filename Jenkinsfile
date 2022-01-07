@@ -52,7 +52,8 @@ pipeline {
                         python -m coverage xml -o reports/coverage.xml
                     '''
                 echo "Style check"
-                sh  ''' echo mok sudo -S source activate ${BUILD_TAG}
+                sh  ''' 
+			echo mok sudo -S source activate ${BUILD_TAG}
                         
                     '''
             }
