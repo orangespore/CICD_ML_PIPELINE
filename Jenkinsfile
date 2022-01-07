@@ -32,6 +32,7 @@ pipeline {
 			echo mok sudo -S conda create --yes -n ${BUILD_TAG} python
                         echo mok sudo -S source activate ${BUILD_TAG}
                         pip install -r requirements/dev.txt
+			echo mok sudo -S apt-get install sloccount
                     '''
             }
         }
